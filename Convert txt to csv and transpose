@@ -1,9 +1,0 @@
-setwd("C:/Users/A00462162/Documents/R/Training Demo/example text files")
-
-# .txt to .csv and transpose data
-FILES <- list.files( pattern = ".txt")
-for (i in 1:length(FILES)) {
-  FILE=read.delim2(file=FILES[i],header=F)
-  FILE_Trans.df <- as.data.frame(t(FILE))
-  write.table(FILE_Trans.df,row.names=FALSE,col.names = FALSE,sep=",",file=paste("C:/Users/A00462162/Documents/R/Training Demo/example text files", sub(".txt","",FILES[i]),".csv"))
-}
