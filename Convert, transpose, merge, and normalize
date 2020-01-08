@@ -1,0 +1,26 @@
+setwd("C:/Users/A00462162/Documents/R/Training Demo/example text files")
+
+# .txt to .csv and transpose data
+FILES <- list.files( pattern = ".txt")
+for (i in 1:length(FILES)) {
+  FILE=read.delim2(file=FILES[i],header=F)
+  FILE_Trans.df <- as.data.frame(t(FILE))
+  write.table(FILE_Trans.df,row.names=FALSE,col.names = FALSE,sep=",",file=paste("C:/Users/A00462162/Documents/R/Training Demo/example text files", sub(".txt","",FILES[i]),".csv"))
+}
+
+# merge all files into one
+filenames <- list.files(path="C:/Users/A00462162/Documents/R/Training Demo/example text files",pattern="*.csv")
+merge <- do.call("rbind",lapply(filenames,FUN=function(files){ read.csv(files)}))
+fullpath=file.path("C:/Users/A00462162/Documents/R/Training Demo/example text files",filenames)
+# in case you want to look at the table: 
+write.table(Merge_ID,file="Merged_ID.csv",row.names=FALSE,na="",col.names=TRUE,sep=",")
+
+#normalize
+Merge_ID.df <- as.data.frame(merge)
+for(i in 1:nrow(Merge_ID.df)){
+  merge[i,] <- Merge_ID.df[i,]/max(Merge_ID.df[i,])
+}
+
+
+R_ready_file <- cbind (fullpath,merge)
+write.table(R_ready_file,file="190122_OMVs_compiled_master.csv",row.names=FALSE,na="",col.names=TRUE,sep=",")
