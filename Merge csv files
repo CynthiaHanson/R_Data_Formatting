@@ -1,0 +1,5 @@
+filenames <- list.files(path="C:/Users/A00462162/Documents/R/Training Demo/example text files",pattern="*.csv")
+merge <- do.call("rbind",lapply(filenames,FUN=function(files){ read.csv(files)}))
+fullpath=file.path("C:/Users/A00462162/Documents/R/Training Demo/example text files",filenames)
+# use following line to look at the table
+write.table(Merge_ID,file="Merged_ID.csv",row.names=FALSE,na="",col.names=TRUE,sep=",")
